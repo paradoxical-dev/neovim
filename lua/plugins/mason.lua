@@ -125,10 +125,10 @@ return {
 				require("nvim-navic").attach(client, bufnr)
 			end
 
-			local lsp_config = require("lspconfig")
 			local capabilities = require("cmp_nvim_lsp").default_capabilities()
+
 			for _, server_name in pairs(opts.ensure_installed) do
-				lsp_config[server_name].setup({
+				vim.lsp.config(server_name, {
 					on_attach = on_attach,
 					capabilities = capabilities,
 				})

@@ -131,15 +131,6 @@ return {
 						WhichKeyBorder = { link = "FloatBorder" },
 						WhichKeyDesc = { fg = "text" },
 						WhichKeyGroup = { fg = "foam", italic = true },
-
-						-- LVIMSPACE
-						LvimSpaceTitle = { link = "FloatTitle" },
-						LvimSpaceSign = { fg = "foam" },
-						LvimSpaceNormal = { bg = "base" },
-						LvimSpaceInput = { bg = "base", fg = "none" },
-						-- LvimSpaceCursor = { bg = "none" },
-						LvimSpaceInfo = { fg = "rose", bg = "base" },
-						LvimSpacePrompt = { fg = "foam", bg = "base" },
 					},
 				})
 				vim.cmd("colorscheme rose-pine")
