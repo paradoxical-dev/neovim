@@ -49,7 +49,8 @@ return {
 			},
 
 			notifier = {
-				enabled = true,
+				-- enabled = true,
+				enabled = false,
 				height = { min = 1, max = 0.8 },
 			},
 
@@ -859,13 +860,13 @@ return {
 				desc = "Toggle Zoom",
 			},
 
-			{
-				"<leader>N",
-				function()
-					Snacks.notifier.show_history()
-				end,
-				desc = "Notification History",
-			},
+			-- {
+			-- 	"<leader>N",
+			-- 	function()
+			-- 		Snacks.notifier.show_history()
+			-- 	end,
+			-- 	desc = "Notification History",
+			-- },
 
 			{
 				"<leader>gg",
