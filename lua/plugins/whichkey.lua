@@ -16,6 +16,7 @@ return {
 				{ "<leader>c", group = "Chat", icon = { icon = "󰭻", color = "grey" } },
 				{ "<leader>x", group = "Tests", icon = { icon = "󰙨", color = "green" } },
 				{ "<leader>r", group = "REST Client", icon = { icon = "", color = "blue" } },
+				{ "<leader>p", group = "Sessions", icon = { icon = "󰸕", color = "yellow" } },
 
 				-- QoL / Movement --
 				{
