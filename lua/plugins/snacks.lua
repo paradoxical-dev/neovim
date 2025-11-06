@@ -860,14 +860,6 @@ return {
 				desc = "Toggle Zoom",
 			},
 
-			-- {
-			-- 	"<leader>N",
-			-- 	function()
-			-- 		Snacks.notifier.show_history()
-			-- 	end,
-			-- 	desc = "Notification History",
-			-- },
-
 			{
 				"<leader>gg",
 				function()

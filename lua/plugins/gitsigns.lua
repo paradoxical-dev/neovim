@@ -39,13 +39,24 @@ return {
 				desc = "Preview Hunk",
 			},
 			{
-				"<leader>gw",
+				"<leader>gt",
+				function()
+					require("gitsigns").toggle_current_line_blame()
+				end,
+				desc = "Toggle Line Blame",
+			},
+			{
+				"<leader>gB",
 				function()
 					require("gitsigns").blame()
 				end,
-				desc = "Stage/Unstage Hunk",
+				desc = "Toggle Line Blame",
 			},
 		},
-		opts = {},
+		opts = {
+			current_line_blame_opts = {
+				delay = 250,
+			},
+		},
 	},
 }
