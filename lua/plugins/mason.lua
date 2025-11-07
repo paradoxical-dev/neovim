@@ -68,7 +68,6 @@ return {
                 "dockerls",
                 "html",
                 "lua_ls",
-                "nil_ls",
                 "pyright",
                 "rust_analyzer",
                 "yamlls",

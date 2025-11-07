@@ -55,11 +55,17 @@ vim.api.nvim_create_autocmd("TextYankPost", {
 	desc = "Highlight on yank",
 })
 
--- vim.api.nvim_create_autocmd("FileType", {
---   desc = "Split help buffers to the right",
---   pattern = "help",
---   command = "wincmd L",
--- })
+vim.api.nvim_create_autocmd("BufWinEnter", {
+	desc = "Always move help buffers to a vertical split on the right",
+	pattern = "*",
+	callback = function()
+		if vim.bo.filetype == "help" or vim.bo.filetype == "man" then
+			vim.schedule(function()
+				vim.cmd("wincmd L")
+			end)
+		end
+	end,
+})
 
 -- persistent folds
 -- WARN: stole this from AstroNvim and have no real idea how it works
