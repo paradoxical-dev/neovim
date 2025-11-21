@@ -60,6 +60,7 @@ return {
 				qflist = true,
 				undo = true,
 				watches = true,
+				-- folds = true,
 			},
 			picker = {
 				default = "snacks",
