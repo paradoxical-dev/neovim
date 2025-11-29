@@ -49,21 +49,23 @@ return {
 					variant = "main",
 					styles = {
 						italic = false,
-						transparency = true,
+						-- transparency = true,
 					},
 					palette = {
 						main = {
-							-- base = "#0d0d0d",
-							-- mantle = "#1c1c21",
-							-- crust = "#151517",
+							base = "#0c0c15",
+							mantle = "#08080f",
+							crust = "#0b0b12",
+							-- gold = "#f9e2af"
 						},
 					},
 					highlight_groups = {
 						-- UI
-						WinBar = { bg = "none" },
-						WinBarNC = { bg = "none" },
-						NormalFloat = { bg = "base" },
-						FloatBorder = { bg = "base", fg = "base" },
+						WinBar = { bg = "base" },
+						WinBarNC = { bg = "base" },
+						WinSeparator = { bg = "base" },
+						NormalFloat = { bg = "mantle" },
+						FloatBorder = { bg = "mantle", fg = "mantle" },
 						FloatTitle = { bg = "#2b3435", fg = "foam", italic = true },
 						StatusLine = { bg = "none" },
 						StatusLineTerm = { bg = "none" },
@@ -119,6 +121,10 @@ return {
 						CmpItemKindFunction = { bg = "pine", fg = "base" },
 						CmpItemKindFunctionDefault = { bg = "pine", fg = "base" },
 
+						-- NVIMTREE
+						NvimTreeNormal = { bg = "mantle" },
+						NvimTreeWinSeparator = { fg = "base" },
+
 						-- SNACKS
 						SnacksIndent = { fg = "base" },
 						SnacksIndentChunk = { fg = "foam" },
@@ -137,30 +143,29 @@ return {
 			end,
 		},
 
-		-- CUSTOM ROSE PINE
+		-- CUSTOM CATPPUCCIN
 		-- {
 		-- 	"catppuccin/nvim",
 		-- 	lazy = false,
 		-- 	priority = 1000,
 		-- 	opts = {
 		-- 		flavour = "mocha",
-		-- 		transparent_background = true,
 		-- 		color_overrides = {
 		-- 			mocha = {
-		-- 				rosewater = "#f6c177",
-		-- 				flamingo = "#ea9a97",
-		-- 				pink = "#ff87a7",
-		-- 				mauve = "#c4a7e7",
-		-- 				red = "#e86a88",
-		-- 				maroon = "#ce717a",
-		-- 				peach = "#f4b57d",
-		-- 				yellow = "#f7c98c",
-		-- 				green = "#31748f",
-		-- 				teal = "#7bbec7",
-		-- 				sky = "#9ccfd8",
-		-- 				sapphire = "#5a99a3",
-		-- 				blue = "#8bc7cf",
-		-- 				lavender = "#d2cbe7",
+		-- 				rosewater = "#f4e0dd",
+		-- 				flamingo = "#edcfcf",
+		-- 				pink = "#edc7e2",
+		-- 				mauve = "#cabaee",
+		-- 				red = "#e595aa",
+		-- 				maroon = "#e0a6af",
+		-- 				peach = "#e2bbae",
+		-- 				yellow = "#f9e2af",
+		-- 				green = "#b4dbc8",
+		-- 				teal = "#a9ddd4",
+		-- 				sky = "#9fd8e2",
+		-- 				sapphire = "#84c5e3",
+		-- 				blue = "#9cb4dc",
+		-- 				lavender = "#b8c0ee",
 		-- 				text = "#cdd6f4",
 		-- 				subtext1 = "#bac2de",
 		-- 				subtext0 = "#a6adc8",
@@ -170,27 +175,30 @@ return {
 		-- 				surface2 = "#585b70",
 		-- 				surface1 = "#45475a",
 		-- 				surface0 = "#313244",
-		-- 				base = "#0d0d0d",
-		-- 				mantle = "#1c1c21",
-		-- 				crust = "#151517",
+		-- 				base = "#0c0c15",
+		-- 				mantle = "#08080f",
+		-- 				crust = "#0b0b12",
 		-- 			},
 		-- 		},
 		-- 		highlight_overrides = {
 		-- 			mocha = function(c)
 		-- 				return {
 		-- 					-- STATUS
-		-- 					HeirlineNormal = { fg = c.pink, bg = c.pink },
-		-- 					HeirlineVisual = { fg = c.mauve, bg = c.mauve },
-		-- 					HeirlineInsert = { fg = c.sku, bg = c.sky },
-		-- 					HeirlineCommand = { fg = c.peach, bg = c.peach },
+		-- 					HeirlineNormal = { fg = c.lavender, bg = c.lavender },
+		-- 					HeirlineVisual = { fg = c.yellow, bg = c.yellow },
+		-- 					HeirlineInsert = { fg = c.rosewater, bg = c.rosewater },
+		-- 					HeirlineCommand = { fg = c.rosewater, bg = c.rosewater },
 		-- 					HeirlineTerminal = { fg = c.yellow, bg = c.yellow },
 		-- 					HeirlineReplace = { fg = c.red, bg = c.red },
 		-- 					HeirlineInactive = { fg = "#777777", bg = "#777777" },
 		--
-		-- 					String = { fg = c.yellow },
-		-- 					Keyword = { fg = c.green },
-		-- 					["@keyword.function"] = { fg = c.green },
-		-- 					["@keyword.return"] = { fg = c.green },
+		-- 					-- SYNTAX
+		-- 					-- String = { fg = c.yellow },
+		-- 					-- String = { fg = c.subtext1 },
+		-- 					-- Function = { fg = c.lavender },
+		-- 					-- ["@function.builtin"] = { fg = c.lavender },
+		-- 					-- ["@keyword.function"] = { fg = c.green },
+		-- 					-- ["@keyword.return"] = { fg = c.green },
 		--
 		-- 					SnacksIndent = { fg = c.mantle },
 		-- 					SnacksIndentChunk = { fg = c.blue },
