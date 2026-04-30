@@ -90,7 +90,7 @@ return {
 					mode = "t",
 				},
 
-				{ "<leader>/", ":%s/\\<<C-r><C-w>\\>/<C-r><C-w>/gi<Left><Left><Left>", desc = "Search and Replace" },
+				-- { "<leader>/", ":%s/\\<<C-r><C-w>\\>/<C-r><C-w>/gi<Left><Left><Left>", desc = "Search and Replace" },
 				{ "<leader>X", "<cmd>!chmod +x %<CR>", desc = "Make Executable" },
 
 				-- UI/UX --
