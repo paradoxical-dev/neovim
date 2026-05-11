@@ -3,7 +3,7 @@ return {
 		{
 			"mistweaverco/kulala.nvim",
 			event = { "BufReadPre" },
-			ft = { "http" },
+			ft = { "http", "rest" },
 			keys = {
 				{
 					"<leader>rr",
