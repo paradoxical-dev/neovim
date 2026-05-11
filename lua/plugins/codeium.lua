@@ -8,6 +8,7 @@ return {
 		},
 		config = function()
 			require("codeium").setup({
+				bin_path = os.getenv("HOME") .. "/.local/share/codeium/",
 				virtual_text = {
 					enabled = true,
 					manual = false,
