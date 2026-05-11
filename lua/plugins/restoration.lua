@@ -1,6 +1,12 @@
 return {
 	{
 		"paradoxical-dev/restoration.nvim",
+		dependencies = {
+			{
+				"niuiic/quickfix.nvim",
+				lazy = true,
+			},
+		},
 		-- lazy = true,
 		event = "BufReadPre",
 		keys = {
