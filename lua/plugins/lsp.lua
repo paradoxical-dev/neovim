@@ -97,6 +97,10 @@ return {
 				name = "󱄅 nil_ls",
 				border_hl = "MarkviewGradient6",
 			},
+			["^nixd"] = {
+				name = "󱄅 nixd",
+				border_hl = "MarkviewGradient6",
+			},
 			["^pyright"] = {
 				name = "󰌠 pyright",
 				border_hl = "MarkviewGradient6",

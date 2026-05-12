@@ -1,4 +1,16 @@
 return {
+  {
+    'emmanueltouzery/apidocs.nvim',
+    dependencies = {
+      'nvim-treesitter/nvim-treesitter',
+      'nvim-telescope/telescope.nvim', -- or, 'folke/snacks.nvim'
+    },
+    cmd = { 'ApidocsSearch', 'ApidocsInstall', 'ApidocsOpen', 'ApidocsSelect', 'ApidocsUninstall' },
+    config = function()
+      require('apidocs').setup()
+    end,
+  },
+
 	{
 		"paradoxical-dev/zeal.nvim",
 		-- dir = "~/Projects/zeal.nvim",
