@@ -2,7 +2,9 @@ return {
 	{
 		"neovim/nvim-lspconfig",
 		event = { "BufReadPre", "BufNewFile" },
-		-- event = "VeryLazy",
+    dependencies = {
+      "folke/neoconf.nvim",
+    },
 		config = function()
 			-- default on attach function
 			vim.api.nvim_create_autocmd("LspAttach", {
@@ -43,6 +45,9 @@ return {
 
 					-- no vtext (because of tiny_inline)
 					vim.diagnostic.config({ virtual_text = false })
+
+          -- prettier hover info
+          require("lsp_hover").setup()
 
 					-- setup navic
 					if client and client.server_capabilities.documentSymbolProvider then
