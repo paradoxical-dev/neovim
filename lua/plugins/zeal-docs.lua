@@ -1,6 +1,7 @@
 return {
 	{
 		"paradoxical-dev/zeal.nvim",
+		-- dir = "~/Projects/zeal.nvim",
 		lazy = false,
 		keys = {
 			{
@@ -13,14 +14,16 @@ return {
 			{
 				"<leader>K",
 				function()
-					require("zeal").search_ft()
+					local query = vim.fn.expand("<cword>")
+					require("zeal").search_ft(query)
 				end,
 				desc = "Search Zeal docs for ft",
 			},
 		},
 		opts = {
-			browser = "w3m",
+			-- browser = { "w3m" },
 			use_toggleterm = true,
+			-- use_toggleterm = false,
 			toggleterm = {
 				direction = "float",
 			},
