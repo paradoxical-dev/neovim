@@ -70,6 +70,7 @@ return {
 				nixd = "nixd",
 				pyright = "pyright",
 				rust_analyzer = "rust-analyzer",
+        ts_ls = "typescript-language-server",
 				yamlls = "yaml-language-server",
 			}
 
@@ -234,6 +235,9 @@ return {
         lua = { "stylua" },
         json = { "jq" },
         nix = { "nixfmt" },
+        javascript = { "prettier" },
+        typescript = { "prettier" },
+        rust = { "rustfmt", lsp_format = "fallback" },
       },
       format_on_save = {
         timeout_ms = 500,

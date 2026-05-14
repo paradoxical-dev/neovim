@@ -12,9 +12,10 @@ return {
   },
 
 	{
-		"paradoxical-dev/zeal.nvim",
 		-- dir = "~/Projects/zeal.nvim",
-		lazy = false,
+		-- lazy = false,
+		"paradoxical-dev/zeal.nvim",
+    event = "VeryLazy",
 		keys = {
 			{
 				"<leader>fd",
@@ -33,9 +34,7 @@ return {
 			},
 		},
 		opts = {
-			-- browser = { "w3m" },
 			use_toggleterm = true,
-			-- use_toggleterm = false,
 			toggleterm = {
 				direction = "float",
 			},
