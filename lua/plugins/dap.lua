@@ -6,20 +6,72 @@ return {
 			{ "niuiic/dap-utils.nvim", dependencies = { "niuiic/core.nvim" } },
 		},
 		config = function()
-			require("dap").adapters["pwa-node"] = {
+			local dap = require("dap")
+
+			-- PYTHON --
+			dap.adapters.python = {
+				type = "executable",
+				command = vim.fn.trim(vim.fn.system("which python")),
+				args = { "-m", "debugpy.adapter" },
+				options = { source_filetype = "python" },
+			}
+			dap.configurations.python = {
+				{
+					type = "python",
+					request = "launch",
+					name = "Launch file",
+					program = "${file}",
+				},
+			}
+
+			-- BASH --
+			dap.adapters.bash = {
+				type = "executable",
+				command = vim.fn.trim(vim.fn.system("which bash-debug-adapter")),
+			}
+			dap.configurations.sh = {
+				{
+					type = "bash",
+					request = "launch",
+					name = "Launch Bash",
+					program = "${file}",
+				},
+			}
+
+			-- C/C++ --
+			dap.adapters.codelldb = {
+				type = "server",
+				port = "${port}",
+				executable = {
+					command = vim.fn.trim(vim.fn.system("which codelldb")),
+					args = { "--port", "${port}" },
+				},
+			}
+			dap.configurations.c = {
+				{
+					name = "Launch",
+					type = "codelldb",
+					request = "launch",
+					program = function()
+						return vim.fn.input("Path to executable: ", vim.fn.getcwd() .. "/", "file")
+					end,
+					cwd = "${workspaceFolder}",
+					stopOnEntry = false,
+				},
+			}
+			dap.configurations.cpp = dap.configurations.c
+
+			-- JAVASCRIPT (pwa-node via js-debug-adapter) --
+			dap.adapters["pwa-node"] = {
 				type = "server",
 				host = "localhost",
 				port = "${port}",
 				executable = {
-					command = "node",
-					args = {
-						os.getenv("HOME")
-							.. "/.local/share/nvim/mason/packages/js-debug-adapter/js-debug/src/dapDebugServer.js",
-						"${port}",
-					},
+					command = vim.fn.trim(vim.fn.system("which js-debug-adapter")),
+					args = { "${port}" },
 				},
 			}
-			require("dap").configurations.javascript = {
+			dap.configurations.javascript = {
 				{
 					name = "Launch with NPM",
 					request = "launch",
@@ -27,7 +79,6 @@ return {
 					runtimeExecutable = "npm",
 					skipFiles = { "<node_internals>/**" },
 					type = "pwa-node",
-					-- program = "${file}",
 					cwd = "${workspaceFolder}",
 				},
 				{
@@ -40,19 +91,45 @@ return {
 					skipFiles = { "<node_internals>/**" },
 				},
 			}
+
+			-- CHROME --
+			dap.adapters.chrome = {
+				type = "executable",
+				command = "node",
+				args = { vim.fn.trim(vim.fn.system("which chrome-debug-adapter")) },
+			}
+			local chrome_path = vim.fn.trim(vim.fn.system("which google-chrome-stable"))
+			local web_root = vim.fn.getcwd() .. "/src"
+			dap.configurations.javascriptreact = {
+				{
+					name = "Launch Chrome",
+					type = "chrome",
+					request = "launch",
+					url = "http://localhost:3000",
+					webRoot = web_root,
+					runtimeExecutable = chrome_path ~= "" and chrome_path or nil,
+					runtimeArgs = {
+						"--remote-debugging-port=9222",
+						"--no-first-run",
+						"--no-default-browser-check",
+						"--disable-default-apps",
+						"--disable-popup-blocking",
+						"--user-data-dir=/tmp/vscode-chrome-debug-profile",
+					},
+					sourceMaps = true,
+					protocol = "inspector",
+				},
+				{
+					name = "Attach to Chrome",
+					type = "chrome",
+					request = "attach",
+					port = 9222,
+					webRoot = web_root,
+					sourceMaps = true,
+					protocol = "inspector",
+				},
+			}
 		end,
-	},
-	{
-		"rcarriga/nvim-dap-ui",
-		lazy = true,
-		dependencies = { "mfussenegger/nvim-dap", "nvim-neotest/nvim-nio" },
-		opts = {},
-	},
-	{
-		"jay-babu/mason-nvim-dap.nvim",
-		dependencies = {
-			"rcarriga/nvim-dap-ui",
-		},
 		keys = {
 			{
 				"<leader>db",
@@ -111,195 +188,19 @@ return {
 				desc = "Run Last",
 			},
 			{
-				"<leader>du",
+				"<leader>dU",
 				function()
 					require("dapui").toggle()
 				end,
 				desc = "Toggle UI",
 			},
 		},
-		opts = {
-			ensure_installed = {
-				"python",
-				"clang",
-				"bash",
-				"chrome",
-				"js",
-				"cppdbg",
-			},
-			handlers = {
-				function(config)
-					require("mason-nvim-dap").default_setup(config)
-				end,
+	},
 
-				bash = function(config)
-					config.adapters = {
-						type = "executable",
-						command = os.getenv("HOME") .. "/.local/share/nvim/mason/bin/bash-debug-adapter",
-					}
-					require("mason-nvim-dap").default_setup(config)
-				end,
-
-				chrome = function(config)
-					local chrome_debug_path = os.getenv("HOME")
-						.. "/.local/share/nvim/mason/packages/chrome-debug-adapter/out/src/chromeDebug.js"
-
-					config.adapters = {
-						type = "executable",
-						command = "node",
-						args = { chrome_debug_path },
-					}
-
-					local chrome_path = vim.fn.trim(vim.fn.system("which google-chrome-stable"))
-					if chrome_path == "" then
-						vim.notify("Could not find Chrome. Set 'runtimeExecutable' manually.", vim.log.levels.ERROR)
-					end
-
-					local web_root = vim.fn.getcwd() .. "/src"
-
-					local launch_config = {
-						name = "Launch Chrome",
-						type = "chrome",
-						request = "launch",
-						url = "http://localhost:3000",
-						webRoot = web_root,
-						runtimeExecutable = chrome_path,
-						runtimeArgs = {
-							"--remote-debugging-port=9222",
-							"--no-first-run",
-							"--no-default-browser-check",
-							"--disable-default-apps",
-							"--disable-popup-blocking",
-							"--user-data-dir=/tmp/vscode-chrome-debug-profile",
-						},
-						sourceMaps = true,
-						protocol = "inspector",
-					}
-
-					local attach_config = {
-						name = "Attach to Chrome",
-						type = "chrome",
-						request = "attach",
-						port = 9222,
-						webRoot = web_root,
-						sourceMaps = true,
-						protocol = "inspector",
-					}
-
-					config.configurations = {
-						launch_config,
-						attach_config,
-					}
-
-					require("mason-nvim-dap").default_setup(config)
-				end,
-
-				-- js = function(config)
-				-- 	local js_debug_path = vim.fn.stdpath("data")
-				-- 		.. "/mason/packages/js-debug-adapter/js-debug/src/dapDebugServer.js"
-				--
-				-- 	config.adapters = {
-				-- 		type = "server",
-				-- 		host = "localhost",
-				-- 		port = "${port}",
-				-- 		executable = {
-				-- 			command = "node",
-				-- 			args = { js_debug_path, "${port}" },
-				-- 		},
-				-- 	}
-				--
-				-- 	config.configurations = {
-				-- 		{
-				-- 			type = "js",
-				-- 			request = "launch",
-				-- 			name = "Launch NPM Script",
-				-- 			program = vim.fn.getcwd() .. "/index.js",
-				-- 			cwd = vim.fn.getcwd(),
-				-- 			runtimeExecutable = "npm",
-				-- 			runtimeArgs = { "run-script", "debug" },
-				-- 			skipFiles = { "<node_internals>/**" },
-				-- 			sourceMaps = true,
-				-- 			protocol = "inspector",
-				-- 			console = "integratedTerminal",
-				-- 		},
-				-- 		{
-				-- 			type = "js",
-				-- 			request = "attach",
-				-- 			name = "Attach to Process",
-				-- 			-- port = 9229,
-				-- 			-- restart = true,
-				-- 			-- timeout = 10000,
-				-- 			processId = require("dap.utils").pick_process,
-				-- 			cwd = vim.fn.getcwd(),
-				-- 			skipFiles = { "<node_internals>/**" },
-				-- 			sourceMaps = true,
-				-- 			protocol = "inspector",
-				-- 		},
-				-- 	}
-				--
-				-- 	config.filetypes = { "javascript", "javascriptreact", "typescript", "typescriptreact" }
-				--
-				-- 	require("mason-nvim-dap").default_setup(config)
-				-- end,
-
-				-- js = function(config)
-				-- 	local js_debug_path = vim.fn.stdpath("data")
-				-- 		.. "/mason/packages/js-debug-adapter/js-debug/src/dapDebugServer.js"
-				--
-				-- 	config.adapters = {
-				-- 		type = "server",
-				-- 		host = "localhost",
-				-- 		port = "${port}",
-				-- 		executable = {
-				-- 			command = "node",
-				-- 			args = { js_debug_path, "${port}" },
-				-- 		},
-				-- 	}
-				--
-				-- 	local configurations = {
-				-- 		{
-				-- 			type = "pwa-node",
-				-- 			request = "launch",
-				-- 			name = "Launch Express App",
-				-- 			program = "${workspaceFolder}/index.js",
-				-- 			cwd = "${workspaceFolder}",
-				-- 			runtimeExecutable = "node",
-				-- 			skipFiles = { "<node_internals>/**" },
-				-- 			sourceMaps = true,
-				-- 			console = "integratedTerminal",
-				-- 		},
-				-- 		{
-				-- 			type = "pwa-node",
-				-- 			request = "attach",
-				-- 			name = "Attach to Process",
-				-- 			processId = require("dap.utils").pick_process,
-				-- 			cwd = "${workspaceFolder}",
-				-- 			skipFiles = { "<node_internals>/**" },
-				-- 		},
-				-- 	}
-				--
-				-- 	config.configurations = config.configurations or {}
-				-- 	vim.list_extend(config.configurations, configurations)
-				--
-				-- 	-- config.configurations.typescript = config.configurations.javascript
-				--
-				-- 	require("mason-nvim-dap").default_setup(config)
-				-- end,
-
-				python = function(config)
-					local path = vim.fn.system("which python")
-					path = path:gsub("%s+$", "")
-					config.adapters = {
-						type = "executable",
-						command = path,
-						args = { "-m", "debugpy.adapter" },
-						options = {
-							source_filetype = "python",
-						},
-					}
-					require("mason-nvim-dap").default_setup(config)
-				end,
-			},
-		},
+	{
+		"rcarriga/nvim-dap-ui",
+		lazy = true,
+		dependencies = { "mfussenegger/nvim-dap", "nvim-neotest/nvim-nio" },
+		opts = {},
 	},
 }
