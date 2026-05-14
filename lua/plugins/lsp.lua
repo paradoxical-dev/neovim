@@ -1,12 +1,13 @@
 return {
-  -- LSP --
+	-- LSP --
 
 	{
 		"neovim/nvim-lspconfig",
 		event = { "BufReadPre", "BufNewFile" },
-    dependencies = {
-      "folke/neoconf.nvim",
-    },
+		dependencies = {
+			"paradoxical-dev/lsp_hover",
+			"folke/neoconf.nvim",
+		},
 		config = function()
 			-- default on attach function
 			vim.api.nvim_create_autocmd("LspAttach", {
@@ -48,8 +49,8 @@ return {
 					-- no vtext (because of tiny_inline)
 					vim.diagnostic.config({ virtual_text = false })
 
-          -- prettier hover info
-          require("lsp_hover").setup()
+					-- prettier hover info
+					require("lsp_hover").setup()
 
 					-- setup navic
 					if client and client.server_capabilities.documentSymbolProvider then
@@ -70,7 +71,7 @@ return {
 				nixd = "nixd",
 				pyright = "pyright",
 				rust_analyzer = "rust-analyzer",
-        ts_ls = "typescript-language-server",
+				ts_ls = "typescript-language-server",
 				yamlls = "yaml-language-server",
 			}
 
@@ -225,24 +226,24 @@ return {
 		},
 	},
 
-  -- FORMATTING --
+	-- FORMATTING --
 
-  {
-    "stevearc/conform.nvim",
-    event = "BufWritePre",
-    opts = {
-      formatters_by_ft = {
-        lua = { "stylua" },
-        json = { "jq" },
-        nix = { "nixfmt" },
-        javascript = { "prettier" },
-        typescript = { "prettier" },
-        rust = { "rustfmt", lsp_format = "fallback" },
-      },
-      format_on_save = {
-        timeout_ms = 500,
-        lsp_fallback = true,
-      },
-    },
-  }
+	{
+		"stevearc/conform.nvim",
+		event = "BufWritePre",
+		opts = {
+			formatters_by_ft = {
+				lua = { "stylua" },
+				json = { "jq" },
+				nix = { "nixfmt" },
+				javascript = { "prettier" },
+				typescript = { "prettier" },
+				rust = { "rustfmt", lsp_format = "fallback" },
+			},
+			format_on_save = {
+				timeout_ms = 500,
+				lsp_fallback = true,
+			},
+		},
+	},
 }
