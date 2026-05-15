@@ -71,7 +71,7 @@ vim.api.nvim_create_autocmd("BufWinEnter", {
 -- persistent folds
 -- WARN: stole this from AstroNvim and have no real idea how it works
 local view_group = vim.api.nvim_create_augroup("auto_view", { clear = true })
-vim.api.nvim_create_autocmd({ "BufWinLeave", "BufWritePost", "WinLeave" }, {
+vim.api.nvim_create_autocmd({ "BufWinLeave", "WinLeave" }, {
 	desc = "Save view with mkview for real files",
 	group = view_group,
 	callback = function(args)

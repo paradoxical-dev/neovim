@@ -64,6 +64,5 @@
   "vim-visual-multi": { "branch": "master", "commit": "a6975e7c1ee157615bbc80fc25e4392f71c344d4" },
   "volt": { "branch": "main", "commit": "620de1321f275ec9d80028c68d1b88b409c0c8b1" },
   "which-key.nvim": { "branch": "main", "commit": "3aab2147e74890957785941f0c1ad87d0a44c15a" },
-  "yazi.nvim": { "branch": "main", "commit": "7622c4d1c6b1f59f0b68e417d3d1cbe77ed64726" },
   "zeal.nvim": { "branch": "main", "commit": "5b60a017ccc0bd9e0f4768367e425fdae6a6e500" }
 }

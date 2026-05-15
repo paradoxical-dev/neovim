@@ -6,6 +6,7 @@
 -- nvim-neo-tree
 -- nvim-rip-substitute
 -- nvim-surround
+-- nvim-ufo
 -- snipe.nvim
 -- vim-multiple-cursors
 
@@ -266,6 +267,17 @@ return {
 		"kylechui/nvim-surround",
 		event = "VeryLazy",
 		opts = {},
+	},
+
+	{
+		"kevinhwang91/nvim-ufo",
+		dependencies = { "kevinhwang91/promise-async" },
+		event = { "VeryLazy" },
+		opts = {
+			provider_selector = function(bufnr, filetype, buftype)
+				return { "treesitter", "indent" }
+			end,
+		},
 	},
 
 	{
