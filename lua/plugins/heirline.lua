@@ -311,7 +311,7 @@ return {
 				{
 					provider = function()
 						local names = {}
-						for i, server in pairs(vim.lsp.get_clients({ bufnr = 0 })) do
+						for _, server in pairs(vim.lsp.get_clients({ bufnr = 0 })) do
 							table.insert(names, server.name)
 						end
 						return " " .. table.concat(names, " ")
@@ -344,8 +344,8 @@ return {
 				},
 				{
 					provider = " ",
-					hl = function(self)
-						local mode = self.mode:sub(1, 1)
+					hl = function()
+						-- local mode = self.mode:sub(1, 1)
 						return {
 							fg = "dark_bg",
 							bg = "dim_bg",
@@ -421,60 +421,60 @@ return {
 			}
 
 			-- CMD INFO --
-			local function is_search()
-				local search_term = vim.fn.getreg("/")
-				local current_word = tostring(vim.fn.expand("<cword>"))
-				local is_active = false
-				if search_term and search_term ~= "" and current_word ~= "" then
-					local escaped_search_term = search_term:gsub("([^%w])", "%%%1")
-					local escaped_word = current_word:gsub("([^%w])", "%%%1")
-					if search_term:match(escaped_word) or current_word:match(escaped_search_term) then
-						is_active = true
-					end
-				end
-				return vim.v.hlsearch ~= 0 and is_active
-			end
-			local function is_macro_recording()
-				return vim.fn.reg_recording() ~= ""
-			end
-			local CmdInfo = {
-				{ provider = "[ ", hl = { fg = "dim_fg" } },
-				{
-					condition = is_search,
-					init = function(self)
-						local ok, search = pcall(vim.fn.searchcount)
-						if ok and search.total then
-							self.search = search
-						end
-					end,
-					provider = function(self)
-						local search = self.search
-						return string.format(" %d/%d", search.current, math.min(search.total, search.maxcount)) or ""
-					end,
-					hl = { fg = "dim_fg", bold = true },
-				},
+			-- local function is_search()
+			-- 	local search_term = vim.fn.getreg("/")
+			-- 	local current_word = tostring(vim.fn.expand("<cword>"))
+			-- 	local is_active = false
+			-- 	if search_term and search_term ~= "" and current_word ~= "" then
+			-- 		local escaped_search_term = search_term:gsub("([^%w])", "%%%1")
+			-- 		local escaped_word = current_word:gsub("([^%w])", "%%%1")
+			-- 		if search_term:match(escaped_word) or current_word:match(escaped_search_term) then
+			-- 			is_active = true
+			-- 		end
+			-- 	end
+			-- 	return vim.v.hlsearch ~= 0 and is_active
+			-- end
+			-- local function is_macro_recording()
+			-- 	return vim.fn.reg_recording() ~= ""
+			-- end
+			-- local CmdInfo = {
+			-- 	{ provider = "[ ", hl = { fg = "dim_fg" } },
+			-- 	{
+			-- 		condition = is_search,
+			-- 		init = function(self)
+			-- 			local ok, search = pcall(vim.fn.searchcount)
+			-- 			if ok and search.total then
+			-- 				self.search = search
+			-- 			end
+			-- 		end,
+			-- 		provider = function(self)
+			-- 			local search = self.search
+			-- 			return string.format(" %d/%d", search.current, math.min(search.total, search.maxcount)) or ""
+			-- 		end,
+			-- 		hl = { fg = "dim_fg", bold = true },
+			-- 	},
+			--
+			-- 	{ provider = "  ", condition = is_macro_recording and is_search },
+			--
+			-- 	{
+			-- 		condition = is_macro_recording,
+			-- 		provider = function()
+			-- 			return "@ " .. vim.fn.reg_recording()
+			-- 		end,
+			-- 		hl = { fg = "dim_fg", bold = true },
+			-- 		update = {
+			-- 			"RecordingEnter",
+			-- 			"RecordingLeave",
+			-- 		},
+			-- 	},
+			-- 	{ provider = " ]", hl = { fg = "dim_fg" } },
+			--
+			-- 	condition = vim.opt.cmdheight == 0 and (is_search() or is_macro_recording()),
+			-- }
 
-				{ provider = "  ", condition = is_macro_recording and is_search },
-
-				{
-					condition = is_macro_recording,
-					provider = function()
-						return "@ " .. vim.fn.reg_recording()
-					end,
-					hl = { fg = "dim_fg", bold = true },
-					update = {
-						"RecordingEnter",
-						"RecordingLeave",
-					},
-				},
-				{ provider = " ]", hl = { fg = "dim_fg" } },
-
-				condition = vim.opt.cmdheight == 0 and (is_search() or is_macro_recording()),
-			}
-
-			local section_separator = { provider = "    " }
+			-- local section_separator = { provider = "    " }
 			local separator = { provider = "  " }
-			local git_separator = { provider = "    ", condition = conditions.is_git_repo }
+			-- local git_separator = { provider = "    ", condition = conditions.is_git_repo }
 			local git_section_sep = { provider = "  ", condition = conditions.is_git_repo }
 
 			local main_status = {
@@ -617,13 +617,13 @@ return {
 
 			opts.winbar = { Navic }
 			opts.opts = {
-				disable_winbar_cb = function(args)
+				disable_winbar_cb = function()
 					return conditions.buffer_matches({
 						buftype = { "nofile", "prompt", "help", "quickfix", "terminal" },
 						filetype = { "^git.*", "fugitive", "Trouble", "dashboard" },
 					})
 				end,
-				disable_statusline_cb = function(args)
+				disable_statusline_cb = function()
 					return conditions.buffer_matches({
 						buftype = { "terminal" },
 					})

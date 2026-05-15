@@ -130,6 +130,7 @@ return {
 					function()
 						vim.cmd("Markview toggle")
 						vim.cmd("TSToggle highlight")
+						local ufo_active
 						if not ufo_active then
 							vim.cmd("UfoDisable")
 							ufo_active = true

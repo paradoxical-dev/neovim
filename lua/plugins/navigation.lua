@@ -274,7 +274,7 @@ return {
 		dependencies = { "kevinhwang91/promise-async" },
 		event = { "VeryLazy" },
 		opts = {
-			provider_selector = function(bufnr, filetype, buftype)
+			provider_selector = function()
 				return { "treesitter", "indent" }
 			end,
 		},

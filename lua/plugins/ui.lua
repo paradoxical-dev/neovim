@@ -180,7 +180,7 @@ return {
 				desc = "Browse Notify History",
 			},
 		},
-		opts = function(_, opts)
+		opts = function()
 			vim.notify = require("notify")
 			return {
 				background_colour = "#000000",

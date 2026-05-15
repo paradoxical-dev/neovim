@@ -840,6 +840,7 @@ return {
 			{
 				"<leader>z",
 				function()
+					local zen_active
 					if zen_active then
 						vim.api.nvim_set_hl(0, "Normal", { bg = "none" })
 						zen_active = false
