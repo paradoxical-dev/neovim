@@ -16,7 +16,7 @@ return {
 			-- 	end,
 			-- },
 		},
-		opts = {
+		opts = { -- TODO: add more sources
 			keymap = { preset = "enter" },
 
 			-- snippets = { preset = "luasnip" },

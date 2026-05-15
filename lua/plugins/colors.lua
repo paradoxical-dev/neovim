@@ -93,9 +93,9 @@ return {
 
 				-- ui
 				hl.StatusLine = { bg = "none" }
-				hl.NvimTreeNormal = { bg = p.black2 }
-				hl.NvimTreeNormalNC = { bg = p.black2 }
 				hl.SnacksIndent = { fg = p.gray1 }
+				hl.TabLineSel = { fg = p.white_alt }
+				hl.TabLine = { bg = p.black2, fg = p.gray2 }
 
 				-- syntax
 				hl.Comment = { fg = p.gray4 }
@@ -136,6 +136,19 @@ return {
 
 				hl.BlinkCmpKindTabNine = { fg = p.black1, bg = p.red.base }
 				hl.BlinkCmpKindCopilot = { fg = p.black1, bg = p.red.base }
+
+				-- neotree
+				hl.NeoTreeNormal = { bg = p.black2 }
+				hl.NeoTreeNormalNC = { bg = p.black2 }
+				hl.NewTreeTabActive = { bg = p.gray1, fg = p.white3 }
+				hl.NewTreeTabInactive = { bg = p.black2, fg = p.gray1 }
+				hl.NewTreeTabSeparatorInactive = { bg = p.green.base, fg = p.gray1 }
+				hl.NeoTreeDirectoryName = { fg = p.white3 }
+				hl.NeoTreeDirectoryIcon = { fg = p.blue1 }
+				hl.NeoTreeTabSeparatorActive = { fg = p.gray3 }
+				hl.NeoTreeGitModified = { fg = p.yellow.base }
+				hl.NeoTreeGitAdded = { fg = p.green.base }
+				hl.NeoTreeGitstaged = { fg = p.green.base }
 			end,
 		},
 		config = function(_, opts)
