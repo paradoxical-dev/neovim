@@ -1,10 +1,12 @@
 -- INFO: includes packages to imrove navigation and text manipulation
 -- plugins included:
 -- flash.nvim
+-- harpoon
+-- nvim-autopairs
 -- nvim-rip-substitute
 -- nvim-surround
 -- snipe.nvim
--- harpoon
+-- vim-multiple-cursors
 
 return {
 	{
@@ -51,50 +53,6 @@ return {
 					require("flash").toggle()
 				end,
 				desc = "Toggle Flash Search",
-			},
-		},
-	},
-
-	{
-		"chrisgrieser/nvim-rip-substitute",
-		cmd = "RipSubstitute",
-		opts = {},
-		keys = {
-			{
-				"<leader>/",
-				function()
-					require("rip-substitute").sub()
-				end,
-				mode = { "n", "x" },
-				desc = "Search and Replace",
-			},
-		},
-	},
-
-	{
-		"kylechui/nvim-surround",
-		event = "VeryLazy",
-		opts = {},
-	},
-
-	{
-		"leath-dub/snipe.nvim",
-		keys = {
-			{
-				"<leader>bs",
-				function()
-					require("snipe").open_buffer_menu()
-				end,
-				desc = "Open Snipe",
-			},
-		},
-		opts = {
-			ui = {
-				max_height = 13,
-				open_win_override = {
-					border = "rounded",
-				},
-				position = "bottomright",
 			},
 		},
 	},
@@ -148,5 +106,63 @@ return {
 				desc = "Harpoon 4",
 			},
 		},
+	},
+
+	{
+		"windwp/nvim-autopairs",
+		event = "InsertEnter",
+		opts = {},
+	},
+
+	{
+		"chrisgrieser/nvim-rip-substitute",
+		cmd = "RipSubstitute",
+		opts = {},
+		keys = {
+			{
+				"<leader>/",
+				function()
+					require("rip-substitute").sub()
+				end,
+				mode = { "n", "x" },
+				desc = "Search and Replace",
+			},
+		},
+	},
+
+	{
+		"kylechui/nvim-surround",
+		event = "VeryLazy",
+		opts = {},
+	},
+
+	{
+		"leath-dub/snipe.nvim",
+		keys = {
+			{
+				"<leader>bs",
+				function()
+					require("snipe").open_buffer_menu()
+				end,
+				desc = "Open Snipe",
+			},
+		},
+		opts = {
+			ui = {
+				max_height = 13,
+				open_win_override = {
+					border = "rounded",
+				},
+				position = "bottomright",
+			},
+		},
+	},
+
+	{
+		"mg979/vim-visual-multi",
+		event = "BufReadPre",
+		config = function()
+			vim.g.VM_silent_exit = 1
+		end,
 	},
 }
