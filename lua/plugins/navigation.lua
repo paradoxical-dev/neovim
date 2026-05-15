@@ -1,12 +1,60 @@
 -- INFO: includes packages to imrove navigation and text manipulation
 -- plugins included:
 -- flash.nvim
--- replace.nvim
+-- nvim-rip-substitute
 -- nvim-surround
 -- snipe.nvim
 -- harpoon
 
 return {
+	{
+		"folke/flash.nvim",
+		event = "VeryLazy",
+		opts = {},
+		keys = {
+			{
+				"s",
+				mode = { "n", "x", "o" },
+				function()
+					require("flash").jump()
+				end,
+				desc = "Flash",
+			},
+			{
+				"S",
+				mode = { "n", "x", "o" },
+				function()
+					require("flash").treesitter()
+				end,
+				desc = "Flash Treesitter",
+			},
+			{
+				"r",
+				mode = "o",
+				function()
+					require("flash").remote()
+				end,
+				desc = "Remote Flash",
+			},
+			{
+				"R",
+				mode = { "o", "x" },
+				function()
+					require("flash").treesitter_search()
+				end,
+				desc = "Treesitter Search",
+			},
+			{
+				"<c-b>",
+				mode = { "c" },
+				function()
+					require("flash").toggle()
+				end,
+				desc = "Toggle Flash Search",
+			},
+		},
+	},
+
 	{
 		"chrisgrieser/nvim-rip-substitute",
 		cmd = "RipSubstitute",
@@ -21,6 +69,12 @@ return {
 				desc = "Search and Replace",
 			},
 		},
+	},
+
+	{
+		"kylechui/nvim-surround",
+		event = "VeryLazy",
+		opts = {},
 	},
 
 	{
