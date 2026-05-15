@@ -1,21 +1,21 @@
 return {
-  {
-    'emmanueltouzery/apidocs.nvim',
-    dependencies = {
-      'nvim-treesitter/nvim-treesitter',
-      'nvim-telescope/telescope.nvim', -- or, 'folke/snacks.nvim'
-    },
-    cmd = { 'ApidocsSearch', 'ApidocsInstall', 'ApidocsOpen', 'ApidocsSelect', 'ApidocsUninstall' },
-    config = function()
-      require('apidocs').setup()
-    end,
-  },
+	{
+		"emmanueltouzery/apidocs.nvim",
+		dependencies = {
+			"nvim-treesitter/nvim-treesitter",
+			"folke/snacks.nvim",
+		},
+		cmd = { "ApidocsSearch", "ApidocsInstall", "ApidocsOpen", "ApidocsSelect", "ApidocsUninstall" },
+		config = function()
+			require("apidocs").setup()
+		end,
+	},
 
 	{
 		-- dir = "~/Projects/zeal.nvim",
 		-- lazy = false,
 		"paradoxical-dev/zeal.nvim",
-    event = "VeryLazy",
+		event = "VeryLazy",
 		keys = {
 			{
 				"<leader>fd",
