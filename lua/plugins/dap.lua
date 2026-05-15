@@ -9,7 +9,7 @@ return {
 			local dap = require("dap")
 
 			-- PYTHON --
-			dap.adapters.python = {
+			dap.adapters.debugpy = {
 				type = "executable",
 				command = vim.fn.trim(vim.fn.system("which python")),
 				args = { "-m", "debugpy.adapter" },
@@ -39,18 +39,15 @@ return {
 			}
 
 			-- C/C++ --
-			dap.adapters.codelldb = {
-				type = "server",
-				port = "${port}",
-				executable = {
-					command = vim.fn.trim(vim.fn.system("which codelldb")),
-					args = { "--port", "${port}" },
-				},
+			dap.adapters.lldb = {
+				type = "executable",
+				command = vim.fn.trim(vim.fn.system("which lldb-dap")),
+				name = "lldb",
 			}
 			dap.configurations.c = {
 				{
 					name = "Launch",
-					type = "codelldb",
+					type = "lldb",
 					request = "launch",
 					program = function()
 						return vim.fn.input("Path to executable: ", vim.fn.getcwd() .. "/", "file")
