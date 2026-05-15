@@ -3,6 +3,7 @@
 -- dressing.nvim
 -- markview.nvim
 -- minty
+-- nvim-colorizer
 -- noice.nvim
 -- nvim-notify
 -- todo-comments.nvim
@@ -85,6 +86,14 @@ return {
 				desc = "Huefy Color Picker",
 			},
 		},
+	},
+
+	{
+		"norcalli/nvim-colorizer.lua",
+		event = "BufReadPre",
+		config = function()
+			require("colorizer").setup()
+		end,
 	},
 
 	{
