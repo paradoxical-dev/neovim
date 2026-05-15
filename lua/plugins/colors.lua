@@ -82,6 +82,7 @@ return {
 				-- float = true,
 			},
 			on_highlight = function(hl, p)
+				-- statusline
 				hl.HeirlineNormal = { fg = p.blue2, bg = p.blue2 }
 				hl.HeirlineVisual = { fg = p.orange.base, bg = p.orange.base }
 				hl.HeirlineInsert = { fg = p.cyan.base, bg = p.cyan.base }
@@ -90,12 +91,51 @@ return {
 				hl.HeirlineReplace = { fg = p.red.base, bg = p.red.base }
 				hl.HeirlineInactive = { fg = "#777777", bg = "#777777" }
 
+				-- ui
 				hl.StatusLine = { bg = "none" }
 				hl.NvimTreeNormal = { bg = p.black2 }
 				hl.NvimTreeNormalNC = { bg = p.black2 }
 				hl.SnacksIndent = { fg = p.gray1 }
 
+				-- syntax
 				hl.Comment = { fg = p.gray4 }
+
+				-- cmp
+				hl.BlinkCmpKindClass = { fg = p.black1, bg = p.yellow.base }
+				hl.BlinkCmpKindStruct = { fg = p.black1, bg = p.yellow.base }
+				hl.BlinkCmpKindModule = { fg = p.black1, bg = p.yellow.base }
+				hl.BlinkCmpKindInterface = { fg = p.black1, bg = p.yellow.base }
+				hl.BlinkCmpKindTypeParameter = { fg = p.black1, bg = p.yellow.base }
+				hl.BlinkCmpKindEnumMember = { fg = p.black1, bg = p.yellow.base }
+				hl.BlinkCmpKindEnum = { fg = p.black1, bg = p.yellow.base }
+				hl.BlinkCmpKindEvent = { fg = p.black1, bg = p.yellow.base }
+
+				hl.BlinkCmpKindUnit = { fg = p.black1, bg = p.magenta.base }
+				hl.BlinkCmpKindColor = { fg = p.black1, bg = p.magenta.base }
+				hl.BlinkCmpKindValue = { fg = p.black1, bg = p.magenta.base }
+				hl.BlinkCmpKindConstant = { fg = p.black1, bg = p.magenta.base }
+
+				hl.BlinkCmpKindConstructor = { fg = p.black1, bg = p.blue2 }
+				hl.BlinkCmpKindMethod = { fg = p.black1, bg = p.blue2 }
+				hl.BlinkCmpKindFunction = { fg = p.black1, bg = p.blue2 }
+
+				hl.BlinkCmpKindVariable = { fg = p.black1, bg = p.cyan.base }
+				hl.BlinkCmpKindReference = { fg = p.black1, bg = p.cyan.base }
+				hl.BlinkCmpKindField = { fg = p.black1, bg = p.cyan.base }
+				hl.BlinkCmpKindProperty = { fg = p.black1, bg = p.cyan.base }
+
+				hl.BlinkCmpKindKeyword = { fg = p.black1, bg = p.blue2 }
+				hl.BlinkCmpKindOperator = { fg = p.black1, bg = p.blue2 }
+
+				hl.BlinkCmpKindSnippet = { fg = p.black1, bg = p.orange.base }
+
+				hl.BlinkCmpKindFolder = { fg = p.black1, bg = p.green.base }
+				hl.BlinkCmpKindFile = { fg = p.black1, bg = p.green.base }
+
+				hl.BlinkCmpKindText = { fg = p.black1, bg = p.gray5 }
+
+				hl.BlinkCmpKindTabNine = { fg = p.black1, bg = p.red.base }
+				hl.BlinkCmpKindCopilot = { fg = p.black1, bg = p.red.base }
 			end,
 		},
 		config = function(_, opts)
