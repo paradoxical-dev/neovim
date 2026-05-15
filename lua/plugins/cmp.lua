@@ -1,3 +1,8 @@
+-- INFO: includes packages for completion and snippets
+-- plugins included:
+-- blink.cmp
+-- codeium.nvim
+
 return {
 	{
 		"saghen/blink.cmp",
@@ -55,5 +60,36 @@ return {
 			sources = { default = { "lsp", "path", "snippets", "buffer" } },
 		},
 		opts_extended = { "sources.default" },
+	},
+
+	{
+		"Exafunction/codeium.nvim",
+		event = "InsertEnter",
+		dependencies = {
+			"nvim-lua/plenary.nvim",
+			"hrsh7th/nvim-cmp",
+		},
+		config = function()
+			require("codeium").setup({
+				bin_path = os.getenv("HOME") .. "/.local/share/codeium/",
+				virtual_text = {
+					enabled = true,
+					manual = false,
+					filetypes = {
+						dashboard = false,
+						typr = false,
+						snacks_picker_input = false,
+						["lvim-space-input"] = false,
+					},
+					idle_delay = 25,
+					key_bindings = {
+						accept = "<C-g>",
+						next = "<C-]>",
+						prev = "<C-[",
+						clear = "<C-x>",
+					},
+				},
+			})
+		end,
 	},
 }
