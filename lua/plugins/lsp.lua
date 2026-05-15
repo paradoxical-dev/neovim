@@ -46,8 +46,17 @@ return {
 						vim.lsp.buf.signature_help()
 					end, options)
 
-					-- no vtext (because of tiny_inline)
-					vim.diagnostic.config({ virtual_text = false })
+					vim.diagnostic.config({
+						virtual_text = false, -- no vtext (because of tiny_inline)
+						signs = {
+							text = {
+								[vim.diagnostic.severity.ERROR] = "",
+								[vim.diagnostic.severity.WARN] = "",
+								[vim.diagnostic.severity.INFO] = "",
+								[vim.diagnostic.severity.HINT] = "",
+							},
+						},
+					})
 
 					-- prettier hover info
 					require("lsp_hover").setup()
