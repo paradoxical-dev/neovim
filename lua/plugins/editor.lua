@@ -121,7 +121,7 @@ return {
 					desc = "Clear Cache",
 				},
 			},
-			opts = function(_, opts)
+			opts = function()
 				vim.filetype.add({
 					extension = {
 						["http"] = "http",
