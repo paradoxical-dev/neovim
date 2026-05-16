@@ -190,8 +190,8 @@ return {
 				sections = {
 					{
 						section = "terminal",
-						cmd = "cat ~/dots/p.txt",
-						height = 9,
+						cmd = "chafa ~/Downloads/mountains_and_clouds.png --format symbols --symbols vhalf --size 70x15 --stretch; sleep 1",
+						height = 10,
 						align = "center",
 						padding = 3,
 					},
