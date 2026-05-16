@@ -1,3 +1,4 @@
+_G.ufo_active = true
 return {
 	{
 		"folke/which-key.nvim",
@@ -129,15 +130,14 @@ return {
 					-- "<cmd>Markview toggle<CR>",
 					function()
 						vim.cmd("Markview toggle")
-						vim.cmd("TSToggle highlight")
-						local ufo_active
-						if not ufo_active then
+						-- vim.cmd("TSToggle highlight")
+						if not _G.ufo_active then
 							vim.cmd("UfoDisable")
-							ufo_active = true
+							_G.ufo_active = true
 							Snacks.notify.info("Markdown Render and UFO Toggled Off", { title = "UI/UX" })
 						else
 							vim.cmd("UfoEnable")
-							ufo_active = false
+							_G.ufo_active = false
 							Snacks.notify.info("Markdown Render and UFO Toggled On", { title = "UI/UX" })
 						end
 					end,

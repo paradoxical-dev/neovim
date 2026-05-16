@@ -9,14 +9,6 @@ return {
 			scroll = { enabled = false },
 
 			styles = {
-				zen = {
-					position = "float",
-					backdrop = {
-						blend = 99,
-						bg = "#000000",
-						transparent = false,
-					},
-				},
 				scratch = {
 					position = "float",
 					backdrop = {
@@ -840,15 +832,6 @@ return {
 			{
 				"<leader>z",
 				function()
-					local zen_active
-					if zen_active then
-						vim.api.nvim_set_hl(0, "Normal", { bg = "none" })
-						zen_active = false
-					else
-						vim.api.nvim_set_hl(0, "Normal", { bg = "#101017" })
-						zen_active = true
-					end
-
 					Snacks.zen()
 				end,
 				desc = "Toggle Zen Mode",
