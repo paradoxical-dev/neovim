@@ -1,6 +1,7 @@
 -- INFO: enahnces the core editor abilites
 -- plugins included:
 -- vim-dadbod
+-- jupynvim
 -- kulala.nvim
 -- nvim-neotest
 
@@ -20,6 +21,20 @@ return {
 		init = function()
 			vim.g.db_ui_use_nerd_fonts = 1
 			vim.g.db_ui_save_location = "~/.local/share/nvim/dadbod/connections"
+		end,
+	},
+
+	{
+		"sheng-tse/jupynvim",
+		build = function(plugin)
+			local install = loadfile(plugin.dir .. "/lua/jupynvim/install.lua")()
+			install.run(plugin)
+		end,
+		config = function()
+			require("jupynvim").setup({
+				log_level = "info",
+				image_renderer = "kitty", -- "placeholder", "kitty", or "chafa"
+			})
 		end,
 	},
 
